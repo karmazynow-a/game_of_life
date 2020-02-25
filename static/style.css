@@ -1,0 +1,113 @@
+
+html{
+	height: 100%;
+}
+
+body{
+	margin:0;
+	background-color: #f9f9f9;
+	font-family: Roboto;
+	color: #404040;
+	box-sizing: border-box;
+	height: 100%;
+}
+
+.content{
+    display: flex; 
+}
+/*
+.left{
+    display: inline-block;
+    height: 100%;
+    padding: 2em;
+    padding-right: 4em;
+}
+
+.right{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    background: blue;
+}
+
+.right .top{
+    width: 100%;
+    padding: 2em;
+    background: yellow;
+}
+
+.right .bottom{
+    width: 100%;
+    padding: 2em;
+    background: green;
+}
+*/
+.left .card{
+    padding: 2em;
+    border: 1px solid #989ead;
+    border-radius: 25px;
+}
+
+
+#matrix, th, td {
+    border: 1px solid #989ead;
+    border-collapse: collapse;
+}
+
+#matrix td{
+    height: 2em;
+    width: 2em;
+}
+
+.cellAlive{
+    background-color: black;
+}
+
+.cellDead{
+    background-color: white;
+}
+
+header{
+	display: inline-block;
+	overflow: hidden;
+	background-color: #989ead;
+	
+	text-align: center;
+	position: sticky;
+	width: 100%;
+	margin: 0;
+	top: 0;
+	z-index: 99; 
+}
+
+footer{
+	margin:0;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #989ead;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+h1{
+	padding:0;
+	padding-top:0.5em;
+	margin:0;
+	color: #f9f9f9;
+	font-size: 3em;
+}
+
+h2{
+	font-size: 1.5em;
+	display: inline;
+}
+
+hr {
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 0.1em;
+	background-color: #f9f9f9;
+	color: #f9f9f9;
+	border: 0 none;
+}
