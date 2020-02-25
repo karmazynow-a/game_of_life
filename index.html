@@ -1,95 +1,113 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-	<title>GAME OF LIFE</title>
-	<meta charset="utf-8">
+  <title>GAME OF LIFE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--bootstrap-->
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!--bootstrap-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+    integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
-  	<!--my styles-->
-	<link rel="stylesheet" href="./static/style.css"> 
+  <!--my styles-->
+  <link rel="stylesheet" href="./static/style.css">
 
-	<!--fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet"> 
+  <!--fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet">
 
 </head>
+
 <body onload="return onLoad();">
-	<header> 
-        <h1>GAME OF LIFE</h1> <br/> 
-        <h2>Aleksandra Poręba</h2> <br/> 
-        <hr/>
-	</header>
-
-	<div class="content">
-        <div class="left">
-                <div class="card">
-                  <div class="card-body">
-    
-                    <button type="button" class="btn btn-primary" id="symStart">START</button>
-                    <button type="button" class="btn btn-primary" id="symStop">STOP</button>
-                    <button type="button" class="btn btn-primary" id="symReset">RESET</button>
-
-                    <br/>
-<hr/>
-
-                    <h5 class="card-title">Parametry wejściowe:</h5>         
-                    <br/>
-                    <h class="card-text"> Ilość żywych sąsiadów, aby komórka pozostała żywa </h>
-                    </br>
-                    <button type="button" class="btn btn-primary">2</button>
-        <button type="button" class="btn btn-primary">3</button>
-        <button type="button" class="btn btn-primary">6</button>
-        <button type="button" class="btn btn-primary">8</button>
-                    <br/> <br/>
-                    <h class="card-text"> Ilość żywych sąsiadów, aby komórka stała żywa  </h>
-                    <br/>                 
-                    <button type="button" class="btn btn-primary">2</button>
-        <button type="button" class="btn btn-primary">3</button>
-        <button type="button" class="btn btn-primary">6</button>
-        <button type="button" class="btn btn-primary">8</button>
-                    <br/> <br/>
-                    <h class="card-text"> Początkowa ilość żywych komórek </h>
-                    <br/>
-                    <div class="input-group">
-                      <input type="number" class="form-control" min="1" max="100" id="startPercent">
-                      <div class="input-group-append">
-                        <span class="input-group-number">%</span>
-                      </div>
+  <div class="content">
+    <div class="left">
+      <div class="head">
+        <header>
+          <h1>game of life</h1>
+        </header>
+        <div class="menu">
+          <button type="button" class="btn btn-primary" id="symStart" onclick="onStart()">START</button>
+          <button type="button" class="btn btn-primary" id="symStop" onclick="onStop()">STOP</button>
+          <button type="button" class="btn btn-primary" id="symReset" onclick="onReset()">RESET</button>
+        </div>
+      </div>
+      <div class="top">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Parametry wejściowe:</h2>
+            <table class="paramTable">
+              <tr>
+                <td>
+                  <h class="card-text"> Ilość żywych sąsiadów, aby komórka pozostała żywa:</h>
+                  <br /> <br />
+                  <button type="button" class="btn btn-primary" id="S2" onclick="onChangeRules('S2')">2</button>
+                  <button type="button" class="btn btn-primary" id="S3" onclick="onChangeRules('S3')">3</button>
+                  <button type="button" class="btn btn-primary" id="S6" onclick="onChangeRules('S6')">6</button>
+                  <button type="button" class="btn btn-primary" id="S8" onclick="onChangeRules('S8')">8</button>
+                </td>
+                <td>
+                  <h class="card-text"> Ilość żywych sąsiadów, aby komórka stała żywa:</h>
+                  <br /> <br />
+                  <button type="button" class="btn btn-primary" id="B2" onclick="onChangeRules('B2')">2</button>
+                  <button type="button" class="btn btn-primary" id="B3" onclick="onChangeRules('B3')">3</button>
+                  <button type="button" class="btn btn-primary" id="B6" onclick="onChangeRules('B6')">6</button>
+                  <button type="button" class="btn btn-primary" id="B8" onclick="onChangeRules('B8')">8</button>
+                </td>
+                <td>
+                  <h class="card-text"> Początkowa ilość żywych komórek:</h>
+                  <br /> <br />
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="1" max="100" id="startPercent">
+                    <div class="input-group-append">
+                      <span class="input-group-text">%</span>
                     </div>
-
                   </div>
-                </div>
-        </div> <!--left-->
-        <div class="right">
-            <div class="top">
-                <table id="matrix"></table>
-            </div> <!--right top-->
-            <div class="bottom">
-                WYKRES
+                </td>
+              </tr>
+            </table>
 
-            </div> <!--right bottom-->
-
-        </div> <!--right-->
-	
+          </div>
+        </div>
+      </div>
+      <!--right top-->
+      <div class="bottom">
+        WYKRES
+      </div>
+      <!--left bottom-->
 
     </div>
-	<footer>
-		Aleksandra Poręba <br/>
-		<address> aleks.poreba97@gmail.com</address>	
-	</footer>
+    <!--left-->
+    <div class="right">
+      <table id="matrix"></table>
 
-	<!--jquery-->
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </div>
+    <!--right-->
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-	<!--my scripts-->
-	<script src = "js/app.js"></script>
+  </div>
+  <footer>
+    Aleksandra Poręba <br />
+    <address> aleks.poreba97@gmail.com</address>
+  </footer>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+    integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+    crossorigin="anonymous"></script>
+
+  <!--my scripts-->
+  <script src="js/app.js"></script>
 
 </body>
+
 </html>

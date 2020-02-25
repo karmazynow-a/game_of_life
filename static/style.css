@@ -5,7 +5,7 @@ html{
 
 body{
 	margin:0;
-	background-color: #f9f9f9;
+	background-color: #f1f1f1;
 	font-family: Roboto;
 	color: #404040;
 	box-sizing: border-box;
@@ -15,39 +15,62 @@ body{
 .content{
     display: flex; 
 }
-/*
+
 .left{
     display: inline-block;
-    height: 100%;
-    padding: 2em;
-    padding-right: 4em;
+	height: 100%;
+	width: 120em;
 }
 
-.right{
-    display: inline-block;
-    height: 100%;
+.left .head{
+	display: flex;
+	vertical-align: bottom;
+	margin-bottom: 0;
+}
+
+.btn-primary, .btn-primary:hover{
+	background-color: #989ead;
+	border-color: #707070;;
+}
+
+.btn-primary:disabled{
+	background-color: #989ead;
+	border-color: #a3a3a3;;
+}
+
+.left .top{
+	display: inline-block;
     width: 100%;
-    background: blue;
+	padding: 2em;
 }
 
-.right .top{
-    width: 100%;
-    padding: 2em;
-    background: yellow;
-}
-
-.right .bottom{
+.left .bottom{
     width: 100%;
     padding: 2em;
     background: green;
 }
-*/
-.left .card{
-    padding: 2em;
-    border: 1px solid #989ead;
-    border-radius: 25px;
+
+.right{
+	display: block;
+    height: 100%;
+	width: 100%;
+	margin-top: 0;
+	padding : 2em;
+	padding-left : 1em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
+.left .top .card{
+    padding: 1em;
+    border: 1px solid #989ead;
+	border-radius: 25px;
+}
+
+#matrix{
+	display: inline-block;
+}
 
 #matrix, th, td {
     border: 1px solid #989ead;
@@ -55,8 +78,8 @@ body{
 }
 
 #matrix td{
-    height: 2em;
-    width: 2em;
+    height: 1em;
+    width: 1em;
 }
 
 .cellAlive{
@@ -67,17 +90,23 @@ body{
     background-color: white;
 }
 
+.paramTable tr td{
+	border: 0px;
+	padding: 0.5em;
+}
+
+.menu {
+	margin: auto;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
 header{
 	display: inline-block;
-	overflow: hidden;
-	background-color: #989ead;
-	
-	text-align: center;
-	position: sticky;
-	width: 100%;
+	padding-left: 5em;
+	font-family: 'Yeon Sung';
 	margin: 0;
 	top: 0;
-	z-index: 99; 
 }
 
 footer{
@@ -94,8 +123,8 @@ h1{
 	padding:0;
 	padding-top:0.5em;
 	margin:0;
-	color: #f9f9f9;
-	font-size: 3em;
+	color: #989ead;
+	font-size: 4em;
 }
 
 h2{
@@ -111,3 +140,4 @@ hr {
 	color: #f9f9f9;
 	border: 0 none;
 }
+
