@@ -44,7 +44,10 @@
                   <br /> <br />
                   <button type="button" class="btn btn-primary" id="S2" onclick="onChangeRules('S2')">2</button>
                   <button type="button" class="btn btn-primary" id="S3" onclick="onChangeRules('S3')">3</button>
+                  <button type="button" class="btn btn-primary" id="S4" onclick="onChangeRules('S4')">4</button>
+                  <button type="button" class="btn btn-primary" id="S5" onclick="onChangeRules('S5')">5</button> <br/>
                   <button type="button" class="btn btn-primary" id="S6" onclick="onChangeRules('S6')">6</button>
+                  <button type="button" class="btn btn-primary" id="S7" onclick="onChangeRules('S7')">7</button>
                   <button type="button" class="btn btn-primary" id="S8" onclick="onChangeRules('S8')">8</button>
                 </td>
                 <td>
@@ -52,7 +55,10 @@
                   <br /> <br />
                   <button type="button" class="btn btn-primary" id="B2" onclick="onChangeRules('B2')">2</button>
                   <button type="button" class="btn btn-primary" id="B3" onclick="onChangeRules('B3')">3</button>
+                  <button type="button" class="btn btn-primary" id="B4" onclick="onChangeRules('B4')">4</button>
+                  <button type="button" class="btn btn-primary" id="B5" onclick="onChangeRules('B5')">5</button> <br/>
                   <button type="button" class="btn btn-primary" id="B6" onclick="onChangeRules('B6')">6</button>
+                  <button type="button" class="btn btn-primary" id="B7" onclick="onChangeRules('B7')">7</button>
                   <button type="button" class="btn btn-primary" id="B8" onclick="onChangeRules('B8')">8</button>
                 </td>
                 <td>
@@ -73,7 +79,12 @@
       </div>
       <!--right top-->
       <div class="bottom">
-        WYKRES
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Gęstość życia:</h2> <br/>
+            <canvas id="plotCanvas"></canvas>
+          </div>
+        </div>
       </div>
       <!--left bottom-->
 
@@ -87,10 +98,12 @@
 
 
   </div>
+  <!--
   <footer>
     Aleksandra Poręba <br />
     <address> aleks.poreba97@gmail.com</address>
   </footer>
+  -->
 
 
   <!-- Optional JavaScript -->

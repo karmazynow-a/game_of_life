@@ -10,6 +10,7 @@ body{
 	color: #404040;
 	box-sizing: border-box;
 	height: 100%;
+	font-size: 0.8em;
 }
 
 .content{
@@ -30,7 +31,8 @@ body{
 
 .btn-primary, .btn-primary:hover{
 	background-color: #989ead;
-	border-color: #707070;;
+	border-color: #707070;
+	margin-bottom: 2px;
 }
 
 .btn-primary:disabled{
@@ -46,8 +48,8 @@ body{
 
 .left .bottom{
     width: 100%;
-    padding: 2em;
-    background: green;
+	padding: 2em;
+	padding-top: 0em;
 }
 
 .right{
@@ -55,15 +57,16 @@ body{
     height: 100%;
 	width: 100%;
 	margin-top: 0;
-	padding : 2em;
+	padding : 3em;
+	padding-top: 4em;
 	padding-left : 1em;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
 
-.left .top .card{
-    padding: 1em;
+.left .card{
+    padding: 0.5em;
     border: 1px solid #989ead;
 	border-radius: 25px;
 }
@@ -78,8 +81,12 @@ body{
 }
 
 #matrix td{
-    height: 1em;
-    width: 1em;
+    height: 0.5em;
+    width: 0.5em;
+}
+
+#plotCanvas{
+	margin: 0.5em;
 }
 
 .cellAlive{
@@ -93,11 +100,13 @@ body{
 .paramTable tr td{
 	border: 0px;
 	padding: 0.5em;
+	vertical-align: top;
 }
 
 .menu {
 	margin: auto;
 	text-align: center;
+	vertical-align: top;
 	margin-bottom: 1em;
 }
 
