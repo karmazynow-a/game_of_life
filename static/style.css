@@ -35,6 +35,12 @@ body{
 	margin-bottom: 2px;
 }
 
+.paramTable .btn-primary {
+	padding: auto;
+	width: 2em;
+	height: 2em;
+}
+
 .btn-primary:disabled{
 	background-color: #989ead;
 	border-color: #a3a3a3;;
