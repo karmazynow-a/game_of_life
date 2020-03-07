@@ -20,7 +20,7 @@ body{
 .left{
     display: inline-block;
 	height: 100%;
-	width: 120em;
+	width: 100em;
 }
 
 .left .head{
@@ -33,12 +33,10 @@ body{
 	background-color: #989ead;
 	border-color: #707070;
 	margin-bottom: 2px;
-}
-
-.paramTable .btn-primary {
-	padding: auto;
-	width: 2em;
-	height: 2em;
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em
 }
 
 .btn-primary:disabled{
@@ -72,7 +70,7 @@ body{
 }
 
 .left .card{
-    padding: 0.5em;
+    padding: 0.2em;
     border: 1px solid #989ead;
 	border-radius: 25px;
 }

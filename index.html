@@ -41,33 +41,40 @@
               <tr>
                 <td>
                   <h class="card-text"> Ilość żywych sąsiadów, aby komórka pozostała żywa:</h>
-                  <br /> <br />
-                  <button type="button" class="btn btn-primary" id="S0" onclick="onChangeRules('S2')">0</button>
-                  <button type="button" class="btn btn-primary" id="S1" onclick="onChangeRules('S3')">1</button>
-                  <button type="button" class="btn btn-primary" id="S2" onclick="onChangeRules('S2')">2</button> <br/>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary" id="S0" onclick="onChangeRules('S0')">0</button>
+                  <button type="button" class="btn btn-primary" id="S1" onclick="onChangeRules('S1')">1</button>
+                  <button type="button" class="btn btn-primary" id="S2" onclick="onChangeRules('S2')">2</button>
                   <button type="button" class="btn btn-primary" id="S3" onclick="onChangeRules('S3')">3</button>
                   <button type="button" class="btn btn-primary" id="S4" onclick="onChangeRules('S4')">4</button>
-                  <button type="button" class="btn btn-primary" id="S5" onclick="onChangeRules('S5')">5</button> <br/> 
+                  <button type="button" class="btn btn-primary" id="S5" onclick="onChangeRules('S5')">5</button> 
                   <button type="button" class="btn btn-primary" id="S6" onclick="onChangeRules('S6')">6</button>
                   <button type="button" class="btn btn-primary" id="S7" onclick="onChangeRules('S7')">7</button>
                   <button type="button" class="btn btn-primary" id="S8" onclick="onChangeRules('S8')">8</button>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <h class="card-text"> Ilość żywych sąsiadów, aby komórka stała żywa:</h>
-                  <br /> <br />
-                  <button type="button" class="btn btn-primary" id="B0" onclick="onChangeRules('B2')">0</button>
-                  <button type="button" class="btn btn-primary" id="B1" onclick="onChangeRules('B3')">1</button>
-                  <button type="button" class="btn btn-primary" id="B2" onclick="onChangeRules('B2')">2</button> <br/>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary" id="B0" onclick="onChangeRules('B0')">0</button>
+                  <button type="button" class="btn btn-primary" id="B1" onclick="onChangeRules('B1')">1</button>
+                  <button type="button" class="btn btn-primary" id="B2" onclick="onChangeRules('B2')">2</button>
                   <button type="button" class="btn btn-primary" id="B3" onclick="onChangeRules('B3')">3</button>
                   <button type="button" class="btn btn-primary" id="B4" onclick="onChangeRules('B4')">4</button>
-                  <button type="button" class="btn btn-primary" id="B5" onclick="onChangeRules('B5')">5</button> <br/>
+                  <button type="button" class="btn btn-primary" id="B5" onclick="onChangeRules('B5')">5</button>
                   <button type="button" class="btn btn-primary" id="B6" onclick="onChangeRules('B6')">6</button>
                   <button type="button" class="btn btn-primary" id="B7" onclick="onChangeRules('B7')">7</button>
                   <button type="button" class="btn btn-primary" id="B8" onclick="onChangeRules('B8')">8</button>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <h class="card-text"> Początkowa ilość żywych komórek:</h>
-                  <br /> <br />
+                </td>
+                <td>
                   <div class="input-group">
                     <input type="number" class="form-control" min="1" max="100" id="startPercent">
                     <div class="input-group-append">
@@ -86,7 +93,8 @@
         <div class="card">
           <div class="card-body">
             <h2 class="card-title">Gęstość życia:</h2> <br/>
-            <canvas id="plotCanvas"></canvas>
+            <!--canvas id="plotCanvas"></canvas-->
+            <div id="plot"></div>
           </div>
         </div>
       </div>
@@ -109,7 +117,6 @@
   </footer>
   -->
 
-
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -123,7 +130,12 @@
     crossorigin="anonymous"></script>
 
   <!--my scripts-->
+  <script src="js/matrix.js"></script>
+  <script src="js/plot.js"></script>
   <script src="js/app.js"></script>
+
+  <!--zingchart-->
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
 </body>
 
