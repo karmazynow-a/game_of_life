@@ -85,12 +85,21 @@ body{
 }
 
 #matrix td{
-    height: 0.5em;
-    width: 0.5em;
+    height: 7px;
+    width: 7px;
 }
 
 #plotCanvas{
 	margin: 0.5em;
+}
+
+#rangeValue{
+	padding-left: 1.2em;
+	font-size: 1.3em;
+}
+
+#matrixW, #matrixH{
+	width: 5em;
 }
 
 .cellAlive{

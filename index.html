@@ -48,7 +48,7 @@
                   <button type="button" class="btn btn-primary" id="S2" onclick="onChangeRules('S2')">2</button>
                   <button type="button" class="btn btn-primary" id="S3" onclick="onChangeRules('S3')">3</button>
                   <button type="button" class="btn btn-primary" id="S4" onclick="onChangeRules('S4')">4</button>
-                  <button type="button" class="btn btn-primary" id="S5" onclick="onChangeRules('S5')">5</button> 
+                  <button type="button" class="btn btn-primary" id="S5" onclick="onChangeRules('S5')">5</button>
                   <button type="button" class="btn btn-primary" id="S6" onclick="onChangeRules('S6')">6</button>
                   <button type="button" class="btn btn-primary" id="S7" onclick="onChangeRules('S7')">7</button>
                   <button type="button" class="btn btn-primary" id="S8" onclick="onChangeRules('S8')">8</button>
@@ -75,16 +75,46 @@
                   <h class="card-text"> Początkowa ilość żywych komórek:</h>
                 </td>
                 <td>
-                  <div class="input-group">
-                    <input type="number" class="form-control" min="1" max="100" id="startPercent">
-                    <div class="input-group-append">
-                      <span class="input-group-text">%</span>
-                    </div>
-                  </div>
+                  <table class="input-group range">
+                    <tr>
+                      <td>
+                        <input type="range" class="form-control-range" min="1" max="100" value="50" id="startPercent"
+                          oninput="onSliderChange()" onchange="onSliderChange()">
+                      </td>
+                      <td>
+                        <output id="rangeValue" for="startPercent"></output>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h class="card-text"> Rozmiar macierzy:</h>
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">W:</div>
+                          </div>
+                          <input type="text" id="matrixW" class="form-control" oninput="setMatrixSize()" onchange="setMatrixSize()">
+                        </div>
+                      <td>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">H:</div>
+                          </div>
+                          <input type="text" class="form-control" id="matrixH" oninput="setMatrixSize()" onchange="setMatrixSize()">
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </table>
-
           </div>
         </div>
       </div>
@@ -92,8 +122,7 @@
       <div class="bottom">
         <div class="card">
           <div class="card-body">
-            <h2 class="card-title">Gęstość życia:</h2> <br/>
-            <!--canvas id="plotCanvas"></canvas-->
+            <h2 class="card-title">Gęstość życia:</h2>
             <div id="plot"></div>
           </div>
         </div>

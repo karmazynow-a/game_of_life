@@ -8,6 +8,7 @@
 var TESTING = false;
 
 var areBtnsDisabled = false;
+var paramsChanged = false;
 
 var timeInterval = 1000; //in miliseconds
 var timer = null;
@@ -15,11 +16,14 @@ var timer = null;
 function onLoad() {
     enableBtns();
     document.getElementById("startPercent").value = startPercent;
+    onSliderChange();
 
     //initial rules
     onChangeRules("B4");
     onChangeRules("S3");
 
+    document.getElementById("matrixH").value = Math.floor(window.innerHeight / 8);
+    document.getElementById("matrixW").value = Math.floor(window.innerWidth / 13);
     setMatrixSize();
     onReset();
     return false;
@@ -27,6 +31,10 @@ function onLoad() {
 
 //start game
 function onStart() {
+    if(paramsChanged){
+        onReset();
+        paramsChanged = false;
+    }
     disableBtns();
     updatePlot();
     timer = setInterval(nextStep, timeInterval);
@@ -35,8 +43,6 @@ function onStart() {
 
 //reset matrix
 function onReset() {
-    startPercent = Number(document.getElementById("startPercent").value)
-    console.log("percent value: " + startPercent)
     paintPlot();
     initMatrix();
     paintMatrix();
@@ -48,6 +54,15 @@ function onStop() {
     clearInterval(timer);
     enableBtns();
     return false;
+}
+
+function onSliderChange() {
+    startPercent = Number(document.getElementById("startPercent").value);
+    document.getElementById("rangeValue").innerHTML = startPercent + "%";
+    console.log("New Percent: " + startPercent);
+    paramsChanged = true;
+    initMatrix();
+    paintMatrix();
 }
 
 //change rules of the game
@@ -72,7 +87,7 @@ function onChangeRules(rule) {
     }
 
     console.log("Rules are " + parS + " & " + parB);
-    onReset();
+    paramsChanged = true;
     return false;
 }
 
@@ -116,6 +131,9 @@ function disableBtns() {
     document.getElementById("B8").disabled = true;
 
     document.getElementById("startPercent").disabled = true;
+
+    document.getElementById("matrixW").disabled = true;
+    document.getElementById("matrixH").disabled = true;
     return false;
 }
 
@@ -147,5 +165,7 @@ function enableBtns() {
     document.getElementById("B8").disabled = false;
 
     document.getElementById("startPercent").disabled = false;
+    document.getElementById("matrixW").disabled = false;
+    document.getElementById("matrixH").disabled = false;
     return false;
 }

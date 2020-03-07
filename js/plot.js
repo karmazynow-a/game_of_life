@@ -1,7 +1,7 @@
 //operations with plot
 
 var chartData = []
-var chartSizeX = 600, chartSizeY = 300;
+var chartSizeX = 600, chartSizeY = 250;
 var chart = {
     "type": "line",
     'scale-x': {
@@ -32,7 +32,7 @@ function paintPlot() {
 }
 
 function updatePlot() {
-    chartData.push(sumMatrix() / (matrixSize ** 2) * 100);
+    chartData.push(sumMatrix() / (matrixSizeX * matrixSizeY) * 100);
     zingchart.exec('plot', 'modify', {
         graphid: 0,
         data: {
