@@ -1,0 +1,92 @@
+
+%----------------------------------------------------------------------------------------
+%	PREAMBUŁA
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+\title{Sprawozdanie}
+\author{Aleksandra Poręba}
+
+\graphicspath{{static/}{../images/}} 
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+
+%----------------------------------------------------------------------------------------
+%	STRONA TYTUŁOWA
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+\textsc{\normalsize Wydział Fizyki i Informatyki Stosowanej}\\[2.0cm] 
+\includegraphics[scale = 1]{logo.png}\\[1cm] 
+%\textsc{\Large Modelowanie Procesów Fizycznych}\\[0.4cm] 
+
+
+\textsc{\Large Sprawozdanie}\\[0.4cm]
+{ \huge \bfseries \LARGE{Projekt 1: Gra w życie} }\\[1cm] 
+
+\flushright \Large Aleksandra Poręba \\ nr. indeksu 290514
+
+\vfill 
+
+\center{\today}
+
+
+\pagebreak 
+
+\end{center}
+
+%----------------------------------------------------------------------------------------
+%	SPIS TREŚCI
+%----------------------------------------------------------------------------------------
+\tableofcontents
+\pagebreak
+
+%----------------------------------------------------------------------------------------
+%	ZAWARTOŚĆ
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\section{Opis projektu}
+W ramach projektu została stworzona aplikacja webowa, prezentująca automat komórkowy, jakim jest gra w życie.
+
+
+
+Użytkownik może dowolnie dobierać zasady, przedstawione jako parametry STAY/BORN. Oznaczają one kolejno ilość żywych sąsiadów, aby komórka stała się żywa oraz ilość żywych sąsiadów, aby komórka pozostała żywa. Możliwy jest również wybór początkowej gęstości siatki oraz jej rozmiar.
+
+Do stworzenia strony zostały użyte technologie HTML + JS + CSS.
+
+\section{Ciekawe struktury}
+\subsection{Life}
+Jedną z ciekawych kombinacji jest 3/23, która jest regułami gry w życie według Conwaya. Po odpowiednio długim czasie mozna wyodrębnić różne ciekawe struktury: martwe, oscylujące, statki czy też działa.
+
+%screen
+
+\end{document}
