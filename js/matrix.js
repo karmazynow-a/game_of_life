@@ -2,94 +2,78 @@
 
 var matrixSizeX = 32;
 var matrixSizeY = 32;
-var startPercent = 50;
+var startPercent = 20;
 
-var parB = [];
-var parS = [];
+var parB = new Array(9).fill(false);
+var parS = new Array(9).fill(false);
 var matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
-var new_matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
 
-function updateMatrix(){
+testMatrix = [
+    [1,0,0,1,1,0,1,0,1,0],
+    [1,1,0,0,1,0,0,1,1,0],
+    [0,0,1,1,1,1,0,1,0,1],
+    [1,1,1,1,1,0,1,0,1,1],
+    [0,1,0,1,1,0,0,0,1,0],
+    [1,0,1,0,0,1,1,1,0,1],
+    [0,1,1,1,0,1,0,0,0,0],
+    [1,0,0,1,1,0,0,0,1,0],
+    [0,0,1,1,1,1,1,1,1,0],
+    [1,1,1,0,0,1,0,1,0,1]
+]
+
+function updateMatrix() {
+    var newMatrix = [];
+    
     for (var i = 0; i < matrixSizeX; ++i) {
+        newMatrix[i] = [];
         for (var j = 0; j < matrixSizeY; ++j) {
+            count = countNeighbours(i, j);
+            
             if (matrix[i][j] == 1) {
-                //is alive
-                new_matrix[i][j] = parS.includes(countNeighbours(i, j)) ? 1 : 0;
-            }
-            else {
-                //is dead
-                new_matrix[i][j] = parB.includes(countNeighbours(i, j)) ? 1 : 0;
+                //is alive - can stay
+                newMatrix[i][j] = parS[count] ? 1 : 0;
+            } else {
+                //is dead - can be born
+                newMatrix[i][j] = parB[count] ? 1 : 0;
             }
         }
     }
-
-    matrix = new_matrix;
+    
+    matrix = newMatrix;
 }
 
 function countNeighbours(i, j) {
-    if (i == 0) {
-        if (j == 0) {
-            //top left corner
-            return matrix[1][matrixSizeY - 1] + matrix[1][0] + matrix[1][1]
-                + matrix[0][matrixSizeY - 1] + matrix[0][1]
-                + matrix[matrixSizeX - 1][matrixSizeY - 1] + matrix[matrixSizeX - 1][0] + matrix[matrixSizeX - 1][1];
 
-        } else if (j == matrixSizeY - 1) {
-            //top right corner
-            return matrix[matrixSizeX - 1][j - 1] + matrix[matrixSizeX - 1][j] + matrix[matrixSizeX - 1][0]
-                + matrix[0][j - 1] + matrix[0][0]
-                + matrix[1][j - 1] + matrix[1][j] + matrix[1][0];
+    function getVal(i, j){
+        if (i < 0) tmp_i = matrixSizeX - 1;
+        else if (i > matrixSizeX - 1 ) tmp_i = 0;
+        else tmp_i = i;
 
-        } else {
-            //right
-            return matrix[1][j - 1] + matrix[1][j] + matrix[1][j + 1]
-                + matrix[0][j - 1] + matrix[0][j + 1]
-                + matrix[matrixSizeX - 1][j - 1] + matrix[matrixSizeX - 1][j] + matrix[matrixSizeX - 1][j + 1];
-        }
-    } else if (i == matrixSizeX - 1) {
-        if (j == 0) {
-            //bottom left corner
-            return matrix[i - 1][matrixSizeY - 1] + matrix[i - 1][0] + matrix[i - 1][1]
-                + matrix[i][matrixSizeY - 1] + matrix[i][1]
-                + matrix[0][matrixSizeY - 1] + matrix[0][0] + matrix[0][1];
+        if (j < 0) tmp_j = matrixSizeY - 1;
+        else if (j > matrixSizeY - 1 ) tmp_j = 0;
+        else tmp_j = j;
 
-        } else if (j == matrixSizeY - 1) {
-            //bottom right corner
-            return matrix[i - 1][j - 1] + matrix[i - 1][j] + matrix[i - 1][0]
-                + matrix[i][j - 1] + matrix[i][0]
-                + matrix[0][j - 1] + matrix[0][j] + matrix[0][0];
-
-        } else {
-            //bottom
-            return matrix[0][j - 1] + matrix[0][j] + matrix[0][j + 1]
-                + matrix[i][j - 1] + matrix[i][j + 1]
-                + matrix[i - 1][j - 1] + matrix[i - 1][j] + matrix[i - 1][j + 1];
-        }
-    } else if (j == 0) {
-        //left
-        return matrix[i - 1][matrixSizeY - 1] + matrix[i][matrixSizeY - 1] + matrix[i + 1][matrixSizeY - 1]
-            + matrix[i - 1][0] + matrix[i + 1][0]
-            + matrix[i - 1][1] + matrix[i][1] + matrix[i + 1][1];
-
-    } else if (j == matrixSizeY - 1) {
-        //right
-        return matrix[i - 1][j - 1] + matrix[i][j - 1] + matrix[i + 1][j - 1]
-            + matrix[i - 1][j] + matrix[i + 1][j]
-            + matrix[i - 1][0] + matrix[i][0] + matrix[i + 1][0];
+        //console.log("neighbour " + tmp_i + " " + tmp_j + " " + matrix[tmp_i][tmp_j]);
+        return matrix[tmp_i][tmp_j];
     }
 
-    return matrix[i - 1][j - 1] + matrix[i - 1][j] + matrix[i - 1][j + 1] +
-        matrix[i][j - 1] + matrix[i][j + 1] +
-        matrix[i + 1][j - 1] + matrix[i + 1][j] + matrix[i + 1][j + 1];
+    return  getVal(i-1, j-1) + getVal(i-1, j) + getVal(i-1, j+1) +
+            getVal(i, j-1) + getVal(i, j+1) +
+            getVal(i+1, j-1) + getVal(i+1, j) + getVal(i+1, j+1);
 }
 
 function initMatrix() {
+    
     matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
     for (var i = 0; i < matrixSizeX; ++i) {
         for (var j = 0; j < matrixSizeY; ++j) {
             matrix[i][j] = Math.random() < startPercent / 100.0 ? 1 : 0;
         }
     }
+      
+    //matrixSizeX = matrixSizeY = 10;
+    //matrix = testMatrix;
+
 }
 
 function paintMatrix() {
@@ -99,7 +83,7 @@ function paintMatrix() {
         var tr = document.createElement('tr');
         for (var j = 0; j < matrixSizeY; ++j) {
             var td = document.createElement('td');
-            td.className = matrix[i][j] == 1 ? "cellAlive" : "cellDead";
+            td.className = (matrix[i][j] == 1) ? "cellAlive" : "cellDead";
             tr.appendChild(td);
         }
         mat.appendChild(tr);
@@ -116,23 +100,11 @@ function sumMatrix() {
 }
 
 function setMatrixSize() {
-    matrixSizeX = Number(document.getElementById("matrixH").value);
-    matrixSizeY = Number(document.getElementById("matrixW").value);
-
-    if (matrixSizeY < 10) {
-        console.log("Za mała wartość parametru!");
-        matrixSizeY = 10;
-        document.getElementById("matrixH").value = matrixSizeY;
-    }
-
-    if (matrixSizeY > Math.floor(window.innerWidth / 13)){
-        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerWidth / 13));
-        matrixSizeY = Math.floor(window.innerWidth / 13);
-        document.getElementById("matrixH").value = matrixSizeY;
-    }
+    matrixSizeX = Number(document.getElementById("matrixW").value);
+    matrixSizeY = Number(document.getElementById("matrixH").value);
 
     if (matrixSizeX < 10){
-        console.log("Za mała wartość parametru!");
+        console.log("Za mała wartość parametru W!");
         matrixSizeX = 10;
         document.getElementById("matrixW").value = matrixSizeX;
     }
@@ -143,8 +115,19 @@ function setMatrixSize() {
         document.getElementById("matrixW").value = matrixSizeX;
     }
 
+    if (matrixSizeY < 10) {
+        console.log("Za mała wartość parametru H!");
+        matrixSizeY = 10;
+        document.getElementById("matrixH").value = matrixSizeY;
+    }
+
+    if (matrixSizeY > Math.floor(window.innerWidth / 13)){
+        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerWidth / 13));
+        matrixSizeY = Math.floor(window.innerWidth / 13);
+        document.getElementById("matrixH").value = matrixSizeY;
+    }
+
     matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
-    new_matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
 
     initMatrix();
     paintMatrix();

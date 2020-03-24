@@ -1,8 +1,3 @@
-/** TODO
- * allow to change matrix size
- * CHECK boundary conditions
- */
-
 
 //initial values
 var TESTING = false;
@@ -10,7 +5,7 @@ var TESTING = false;
 var areBtnsDisabled = false;
 var paramsChanged = false;
 
-var timeInterval = 1000; //in miliseconds
+var timeInterval = 10; //in miliseconds
 var timer = null;
 
 function onLoad() {
@@ -19,8 +14,9 @@ function onLoad() {
     onSliderChange();
 
     //initial rules
-    onChangeRules("B4");
+    onChangeRules("B3");
     onChangeRules("S3");
+    onChangeRules("S2");
 
     document.getElementById("matrixH").value = Math.floor(window.innerHeight / 8);
     document.getElementById("matrixW").value = Math.floor(window.innerWidth / 13);
@@ -59,7 +55,6 @@ function onStop() {
 function onSliderChange() {
     startPercent = Number(document.getElementById("startPercent").value);
     document.getElementById("rangeValue").innerHTML = startPercent + "%";
-    console.log("New Percent: " + startPercent);
     paramsChanged = true;
     initMatrix();
     paintMatrix();
@@ -71,24 +66,18 @@ function onChangeRules(rule) {
 
     var par = rule[0] == 'S' ? parS : parB;
 
-    if (par.includes(Number(rule[1]))) {
-        //remove rule
-        var index = par.indexOf(Number(rule[1]));
-        if (index !== -1) par.splice(index, 1);
+    par[Number(rule[1])] = par[Number(rule[1])] ? false : true;
+    par[Number(rule[1])] ?
+            //push button
+            document.getElementById(rule).style.backgroundColor = "#595d66"
+            :
+            //pop button
+            document.getElementById(rule).style.backgroundColor = "#989ead";
 
-        //pop button
-        document.getElementById(rule).style.backgroundColor = "#989ead"
-    }
-    else {
-        par.push(Number(rule[1]));
 
-        //push button
-        document.getElementById(rule).style.backgroundColor = "#595d66"
-    }
-
-    console.log("Rules are " + parS + " & " + parB);
+    console.log("Rules are B "+ parB + " & S: " + parS);
     paramsChanged = true;
-    return false;
+    return false; 
 }
 
 //do next step of the game
