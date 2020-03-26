@@ -105,7 +105,7 @@ function sumMatrix() {
 
 //proportions matrix to window size
 divideX = 12;
-divideY = 20;
+divideY = 25;
 
 function setMatrixSize() {
     matrixSizeX = Number(document.getElementById("matrixW").value);
