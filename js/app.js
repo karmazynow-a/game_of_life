@@ -4,12 +4,20 @@ var TESTING = false;
 
 var areBtnsDisabled = false;
 var paramsChanged = false;
+var continueAnimating = false;
 
-var timeInterval = 10; //in miliseconds
+var timeInterval = 200; //in miliseconds
 var timer = null;
+
+var maxOper = 15000000;
+var maxIt = maxOper/(matrixSizeX*matrixSizeY);
+var it = 0;
 
 function onLoad() {
     enableBtns();
+
+    document.getElementById('symStop').addEventListener('click',onStop);
+
     document.getElementById("startPercent").value = startPercent;
     onSliderChange();
 
@@ -27,6 +35,7 @@ function onLoad() {
 
 //start game
 function onStart() {
+    continueAnimating = true;
     if(paramsChanged){
         onReset();
         paramsChanged = false;
@@ -39,6 +48,7 @@ function onStart() {
 
 //reset matrix
 function onReset() {
+    it = 0;
     paintPlot();
     initMatrix();
     paintMatrix();
@@ -47,6 +57,7 @@ function onReset() {
 
 //stop game
 function onStop() {
+    continueAnimating = false;
     clearInterval(timer);
     enableBtns();
     return false;
@@ -82,9 +93,18 @@ function onChangeRules(rule) {
 
 //do next step of the game
 function nextStep() {
-    updateMatrix();
-    paintMatrix();
-    updatePlot();
+    if (it > maxIt) {
+	window.alert("Osiągnięto maksymalną liczbę iteracji!");
+	console.log(it);
+	paramsChanged = true;
+	onStop();
+    }
+    if (continueAnimating) {
+	setTimeout(updateMatrix, 10);
+        setTimeout(paintMatrix, 10);
+	setTimeout(updatePlot, 10);
+    }
+    ++it;
 }
 
 function onWindowResize() {

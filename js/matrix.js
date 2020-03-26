@@ -7,6 +7,7 @@ var startPercent = 20;
 var parB = new Array(9).fill(false);
 var parS = new Array(9).fill(false);
 var matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
+var newMatrix = [];
 
 testMatrix = [
     [1,0,0,1,1,0,1,0,1,0],
@@ -22,7 +23,7 @@ testMatrix = [
 ]
 
 function updateMatrix() {
-    var newMatrix = [];
+    newMatrix = [];
     
     for (var i = 0; i < matrixSizeX; ++i) {
         newMatrix[i] = [];
@@ -42,28 +43,26 @@ function updateMatrix() {
     matrix = newMatrix;
 }
 
+function getVal(i, j){
+    if (i < 0) tmp_i = matrixSizeX - 1;
+    else if (i > matrixSizeX - 1 ) tmp_i = 0;
+    else tmp_i = i;
+
+    if (j < 0) tmp_j = matrixSizeY - 1;
+    else if (j > matrixSizeY - 1 ) tmp_j = 0;
+    else tmp_j = j;
+
+    //console.log("neighbour " + tmp_i + " " + tmp_j + " " + matrix[tmp_i][tmp_j]);
+    return matrix[tmp_i][tmp_j];
+}
+
 function countNeighbours(i, j) {
-
-    function getVal(i, j){
-        if (i < 0) tmp_i = matrixSizeX - 1;
-        else if (i > matrixSizeX - 1 ) tmp_i = 0;
-        else tmp_i = i;
-
-        if (j < 0) tmp_j = matrixSizeY - 1;
-        else if (j > matrixSizeY - 1 ) tmp_j = 0;
-        else tmp_j = j;
-
-        //console.log("neighbour " + tmp_i + " " + tmp_j + " " + matrix[tmp_i][tmp_j]);
-        return matrix[tmp_i][tmp_j];
-    }
-
     return  getVal(i-1, j-1) + getVal(i-1, j) + getVal(i-1, j+1) +
             getVal(i, j-1) + getVal(i, j+1) +
             getVal(i+1, j-1) + getVal(i+1, j) + getVal(i+1, j+1);
 }
 
 function initMatrix() {
-    
     matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
     for (var i = 0; i < matrixSizeX; ++i) {
         for (var j = 0; j < matrixSizeY; ++j) {
@@ -99,9 +98,16 @@ function sumMatrix() {
         .reduce(function (a, b) { return a + b });
 }
 
+divideX = 12;
+divideY = 20;
+
 function setMatrixSize() {
     matrixSizeX = Number(document.getElementById("matrixW").value);
     matrixSizeY = Number(document.getElementById("matrixH").value);
+    maxX = Math.floor(window.innerHeight / divideX) > 100
+	? 100 : Math.floor(window.innerHeight / divideX);
+    maxY = Math.floor(window.innerWidth / divideY) > 100 
+	? 100 : Math.floor(window.innerWidth / divideY);
 
     if (matrixSizeX < 10){
         console.log("Za mała wartość parametru W!");
@@ -109,9 +115,9 @@ function setMatrixSize() {
         document.getElementById("matrixW").value = matrixSizeX;
     }
     
-    if (matrixSizeX > Math.floor(window.innerHeight / 8)){
-        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerHeight / 8));
-        matrixSizeX = Math.floor(window.innerHeight / 8);
+    if (matrixSizeX > maxX){
+        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerHeight / divideX));
+        matrixSizeX = maxX;
         document.getElementById("matrixW").value = matrixSizeX;
     }
 
@@ -121,9 +127,9 @@ function setMatrixSize() {
         document.getElementById("matrixH").value = matrixSizeY;
     }
 
-    if (matrixSizeY > Math.floor(window.innerWidth / 13)){
-        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerWidth / 13));
-        matrixSizeY = Math.floor(window.innerWidth / 13);
+    if (matrixSizeY > maxY){
+        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerWidth / divideY));
+        matrixSizeY = maxY;
         document.getElementById("matrixH").value = matrixSizeY;
     }
 
@@ -131,4 +137,7 @@ function setMatrixSize() {
 
     initMatrix();
     paintMatrix();
+
+    maxIt = maxOper/(matrixSizeX*matrixSizeY);
+    console.log("Max iterations are " + maxIt);
 }
