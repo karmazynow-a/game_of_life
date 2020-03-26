@@ -102,14 +102,6 @@ body{
 	width: 5em;
 }
 
-.cellAlive{
-    background-color: #383a40;
-}
-
-.cellDead{
-    background-color: white;
-}
-
 .paramTable tr td{
 	border: 0px;
 	padding: 0.5em;

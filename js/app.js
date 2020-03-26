@@ -1,17 +1,11 @@
 
 //initial values
-var TESTING = false;
-
 var areBtnsDisabled = false;
 var paramsChanged = false;
 var continueAnimating = false;
 
 var timeInterval = 200; //in miliseconds
 var timer = null;
-
-var maxOper = 15000000;
-var maxIt = maxOper/(matrixSizeX*matrixSizeY);
-var it = 0;
 
 function onLoad() {
     enableBtns();
@@ -48,7 +42,6 @@ function onStart() {
 
 //reset matrix
 function onReset() {
-    it = 0;
     paintPlot();
     initMatrix();
     paintMatrix();
@@ -93,18 +86,11 @@ function onChangeRules(rule) {
 
 //do next step of the game
 function nextStep() {
-    if (it > maxIt) {
-	window.alert("Osiągnięto maksymalną liczbę iteracji!");
-	console.log(it);
-	paramsChanged = true;
-	onStop();
-    }
     if (continueAnimating) {
 	setTimeout(updateMatrix, 10);
         setTimeout(paintMatrix, 10);
 	setTimeout(updatePlot, 10);
     }
-    ++it;
 }
 
 function onWindowResize() {

@@ -9,6 +9,11 @@ var parS = new Array(9).fill(false);
 var matrix = new Array(matrixSizeX).fill(0).map(() => new Array(matrixSizeY).fill(0));
 var newMatrix = [];
 
+const deadColor = "white";
+const aliveColor = "#383a40";
+const strokeColor = "#989ead";
+const cellSize = 10;
+
 testMatrix = [
     [1,0,0,1,1,0,1,0,1,0],
     [1,1,0,0,1,0,0,1,1,0],
@@ -52,7 +57,6 @@ function getVal(i, j){
     else if (j > matrixSizeY - 1 ) tmp_j = 0;
     else tmp_j = j;
 
-    //console.log("neighbour " + tmp_i + " " + tmp_j + " " + matrix[tmp_i][tmp_j]);
     return matrix[tmp_i][tmp_j];
 }
 
@@ -69,28 +73,29 @@ function initMatrix() {
             matrix[i][j] = Math.random() < startPercent / 100.0 ? 1 : 0;
         }
     }
-      
-    //matrixSizeX = matrixSizeY = 10;
-    //matrix = testMatrix;
-
 }
 
 function paintMatrix() {
-    var mat = document.createElement("matrix");
+    const drawBoard = (ctx, step) => {
+	for (var i = 0; i < matrixSizeX; ++i) {
+    	    for (var j = 0; j < matrixSizeY; ++j) {
+      		ctx.fillStyle = (matrix[i][j] == 1) ? aliveColor : deadColor;
+      		ctx.fillRect(j * step, i * step, step, step);
 
-    for (var i = 0; i < matrixSizeX; ++i) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < matrixSizeY; ++j) {
-            var td = document.createElement('td');
-            td.className = (matrix[i][j] == 1) ? "cellAlive" : "cellDead";
-            tr.appendChild(td);
+	        ctx.beginPath();
+      		ctx.strokeStyle = strokeColor;
+      		ctx.strokeRect(j * step, i * step, step, step);
+      		ctx.closePath();
+    	    }
         }
-        mat.appendChild(tr);
-    }
+    };
+    const c = document.getElementById('matrix');
 
-    document.getElementById("matrix").innerHTML = mat.innerHTML;
+    c.height = cellSize * matrixSizeX;
+    c.width = cellSize * matrixSizeY;
+    const ctx = c.getContext("2d");
 
-    return false;
+    drawBoard(ctx, cellSize);
 }
 
 function sumMatrix() {
@@ -98,16 +103,15 @@ function sumMatrix() {
         .reduce(function (a, b) { return a + b });
 }
 
+//proportions matrix to window size
 divideX = 12;
 divideY = 20;
 
 function setMatrixSize() {
     matrixSizeX = Number(document.getElementById("matrixW").value);
     matrixSizeY = Number(document.getElementById("matrixH").value);
-    maxX = Math.floor(window.innerHeight / divideX) > 100
-	? 100 : Math.floor(window.innerHeight / divideX);
-    maxY = Math.floor(window.innerWidth / divideY) > 100 
-	? 100 : Math.floor(window.innerWidth / divideY);
+    maxX = Math.floor(window.innerHeight / divideX);
+    maxY = Math.floor(window.innerWidth / divideY);
 
     if (matrixSizeX < 10){
         console.log("Za mała wartość parametru W!");
@@ -116,7 +120,7 @@ function setMatrixSize() {
     }
     
     if (matrixSizeX > maxX){
-        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerHeight / divideX));
+        console.log("Za duża wartość parametru! Maksymalna wartość: " + maxX);
         matrixSizeX = maxX;
         document.getElementById("matrixW").value = matrixSizeX;
     }
@@ -128,7 +132,7 @@ function setMatrixSize() {
     }
 
     if (matrixSizeY > maxY){
-        console.log("Za duża wartość parametru! Maksymalna wartość: " + Math.floor(window.innerWidth / divideY));
+        console.log("Za duża wartość parametru! Maksymalna wartość: " + maxY);
         matrixSizeY = maxY;
         document.getElementById("matrixH").value = matrixSizeY;
     }
@@ -137,7 +141,4 @@ function setMatrixSize() {
 
     initMatrix();
     paintMatrix();
-
-    maxIt = maxOper/(matrixSizeX*matrixSizeY);
-    console.log("Max iterations are " + maxIt);
 }
